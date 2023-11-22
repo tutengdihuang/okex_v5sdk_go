@@ -11,6 +11,7 @@ import (
 	"hash/crc32"
 	"log"
 	"strconv"
+	"strings"
 )
 
 // 普通推送
@@ -34,7 +35,7 @@ type DepthDetail struct {
 }
 
 /*
-	深度数据校验
+深度数据校验
 */
 func (this *DepthData) CheckSum(snap *DepthDetail) (pDepData *DepthDetail, err error) {
 
@@ -117,10 +118,10 @@ func CalCrc32(askDepths [][]string, bidDepths [][]string) (bytes.Buffer, int32) 
 }
 
 /*
-	深度合并的内部方法
-	返回结果：
-	res：合并后的深度
-	index: 最新的 ask1/bids1 的索引
+深度合并的内部方法
+返回结果：
+res：合并后的深度
+index: 最新的 ask1/bids1 的索引
 */
 func mergeDepth(oldDepths [][]string, newDepths [][]string, method string) (res [][]string, err error) {
 
@@ -186,7 +187,7 @@ func mergeDepth(oldDepths [][]string, newDepths [][]string, method string) (res 
 }
 
 /*
-	深度合并，并校验
+深度合并，并校验
 */
 func MergDepthData(snap DepthDetail, update DepthDetail, expChecksum int32) (res *DepthDetail, err error) {
 

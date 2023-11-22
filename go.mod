@@ -1,4 +1,4 @@
-module okex_v5sdk_go
+module github.com/tutengdihuang/okex_v5sdk_go
 
 go 1.15
 
