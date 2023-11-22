@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 	"log"
+	. "okex_v5sdk_go/rest"
+	. "okex_v5sdk_go/ws"
 	"time"
-	. "v5sdk_go/rest"
-	. "v5sdk_go/ws"
 )
 
 /*

@@ -4,18 +4,18 @@ import (
 	"context"
 	"errors"
 	"log"
+	. "okex_v5sdk_go/config"
+	"okex_v5sdk_go/rest"
+	. "okex_v5sdk_go/utils"
+	. "okex_v5sdk_go/ws/wImpl"
+	. "okex_v5sdk_go/ws/wInterface"
 	"sync"
 	"time"
-	. "v5sdk_go/config"
-	"v5sdk_go/rest"
-	. "v5sdk_go/utils"
-	. "v5sdk_go/ws/wImpl"
-	. "v5sdk_go/ws/wInterface"
 )
 
 /*
-	Ping服务端保持心跳。
-	timeOut:超时时间(毫秒)，如果不填默认为5000ms
+Ping服务端保持心跳。
+timeOut:超时时间(毫秒)，如果不填默认为5000ms
 */
 func (a *WsClient) Ping(timeOut ...int) (res bool, detail *ProcessDetail, err error) {
 	tm := 5000
@@ -54,7 +54,7 @@ func (a *WsClient) Ping(timeOut ...int) (res bool, detail *ProcessDetail, err er
 }
 
 /*
-	登录私有频道
+登录私有频道
 */
 func (a *WsClient) Login(apiKey, secKey, passPhrase string, timeOut ...int) (res bool, detail *ProcessDetail, err error) {
 
@@ -140,7 +140,7 @@ func (a *WsClient) Login(apiKey, secKey, passPhrase string, timeOut ...int) (res
 }
 
 /*
-	等待结果响应
+等待结果响应
 */
 func (a *WsClient) waitForResult(e Event, timeOut int) (data interface{}, err error) {
 
@@ -168,7 +168,7 @@ func (a *WsClient) waitForResult(e Event, timeOut int) (data interface{}, err er
 }
 
 /*
-	发送消息到服务端
+发送消息到服务端
 */
 func (a *WsClient) Send(ctx context.Context, op WSReqData) (err error) {
 	select {
@@ -289,8 +289,8 @@ func (a *WsClient) process(ctx context.Context, e Event, op WSReqData) (data []*
 }
 
 /*
-	根据args请求参数判断请求类型
-	如：{"channel": "account","ccy": "BTC"} 类型为 EVENT_BOOK_ACCOUNT
+根据args请求参数判断请求类型
+如：{"channel": "account","ccy": "BTC"} 类型为 EVENT_BOOK_ACCOUNT
 */
 func GetEventByParam(param map[string]string) (evtId Event) {
 	evtId = EVENT_UNKNOWN
@@ -304,8 +304,8 @@ func GetEventByParam(param map[string]string) (evtId Event) {
 }
 
 /*
-	订阅频道。
-	req：请求json字符串
+订阅频道。
+req：请求json字符串
 */
 func (a *WsClient) Subscribe(param map[string]string, timeOut ...int) (res bool, detail *ProcessDetail, err error) {
 	res = true
@@ -355,8 +355,8 @@ func (a *WsClient) Subscribe(param map[string]string, timeOut ...int) (res bool,
 }
 
 /*
-	取消订阅频道。
-	req：请求json字符串
+取消订阅频道。
+req：请求json字符串
 */
 func (a *WsClient) UnSubscribe(param map[string]string, timeOut ...int) (res bool, detail *ProcessDetail, err error) {
 	res = true
@@ -404,7 +404,7 @@ func (a *WsClient) UnSubscribe(param map[string]string, timeOut ...int) (res boo
 }
 
 /*
-	jrpc请求
+jrpc请求
 */
 func (a *WsClient) Jrpc(id, op string, params []map[string]interface{}, timeOut ...int) (res bool, detail *ProcessDetail, err error) {
 	res = true

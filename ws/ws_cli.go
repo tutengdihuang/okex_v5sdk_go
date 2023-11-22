@@ -6,13 +6,13 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	. "okex_v5sdk_go/config"
+	. "okex_v5sdk_go/utils"
+	. "okex_v5sdk_go/ws/wImpl"
 	"regexp"
 	"runtime/debug"
 	"sync"
 	"time"
-	. "v5sdk_go/config"
-	. "v5sdk_go/utils"
-	. "v5sdk_go/ws/wImpl"
 
 	"github.com/gorilla/websocket"
 )
@@ -55,9 +55,9 @@ type WsClient struct {
 }
 
 /*
-	服务端响应详细信息
-	Timestamp: 接受到消息的时间
-	Info: 接受到的消息字符串
+服务端响应详细信息
+Timestamp: 接受到消息的时间
+Info: 接受到的消息字符串
 */
 type Msg struct {
 	Timestamp time.Time   `json:"timestamp"`
@@ -71,7 +71,7 @@ func (this *Msg) Print() {
 }
 
 /*
-	订阅结果封装后的消息结构体
+订阅结果封装后的消息结构体
 */
 type ProcessDetail struct {
 	EndPoint string        `json:"endPoint"`
@@ -112,7 +112,7 @@ func NewWsClient(ep string) (r *WsClient, err error) {
 }
 
 /*
-	新增记录深度信息
+新增记录深度信息
 */
 func (a *WsClient) addDepthDataList(key string, dd DepthDetail) error {
 	a.DepthDataLock.Lock()
@@ -122,7 +122,7 @@ func (a *WsClient) addDepthDataList(key string, dd DepthDetail) error {
 }
 
 /*
-	更新记录深度信息（如果没有记录不会更新成功）
+更新记录深度信息（如果没有记录不会更新成功）
 */
 func (a *WsClient) updateDepthDataList(key string, dd DepthDetail) error {
 	a.DepthDataLock.Lock()
@@ -136,7 +136,7 @@ func (a *WsClient) updateDepthDataList(key string, dd DepthDetail) error {
 }
 
 /*
-	删除记录深度信息
+删除记录深度信息
 */
 func (a *WsClient) deleteDepthDataList(key string) error {
 	a.DepthDataLock.Lock()
@@ -146,7 +146,7 @@ func (a *WsClient) deleteDepthDataList(key string) error {
 }
 
 /*
-	设置是否自动深度管理，开启 true，关闭 false
+设置是否自动深度管理，开启 true，关闭 false
 */
 func (a *WsClient) EnableAutoDepthMgr(b bool) error {
 	a.DepthDataLock.Lock()
@@ -162,7 +162,7 @@ func (a *WsClient) EnableAutoDepthMgr(b bool) error {
 }
 
 /*
-	获取当前的深度快照信息(合并后的)
+获取当前的深度快照信息(合并后的)
 */
 func (a *WsClient) GetSnapshotByChannel(data DepthData) (snapshot *DepthDetail, err error) {
 	key, err := json.Marshal(data.Arg)
@@ -309,7 +309,7 @@ func (a *WsClient) work() {
 }
 
 /*
-	处理接受到的消息
+处理接受到的消息
 */
 func (a *WsClient) receive() {
 	defer func() {
@@ -443,7 +443,7 @@ func (a *WsClient) receive() {
 }
 
 /*
-	开启了深度数据管理功能后，系统会自动合并深度信息
+开启了深度数据管理功能后，系统会自动合并深度信息
 */
 func (a *WsClient) MergeDepth(depData DepthData) (err error) {
 	if !a.autoDepthMgr {
@@ -496,7 +496,7 @@ func (a *WsClient) MergeDepth(depData DepthData) (err error) {
 }
 
 /*
-	通过ErrorCode判断事件类型
+通过ErrorCode判断事件类型
 */
 func GetInfoFromErrCode(data ErrData) Event {
 	switch data.Code {
@@ -528,9 +528,10 @@ func GetInfoFromErrCode(data ErrData) Event {
 }
 
 /*
-   从error返回中解析出对应的channel
-   error信息样例
- {"event":"error","msg":"channel:index-tickers,instId:BTC-USDT1 doesn't exist","code":"60018"}
+	从error返回中解析出对应的channel
+	error信息样例
+
+{"event":"error","msg":"channel:index-tickers,instId:BTC-USDT1 doesn't exist","code":"60018"}
 */
 func GetInfoFromErrMsg(raw string) (channel string) {
 	reg := regexp.MustCompile(`channel:(.*?),`)
@@ -547,7 +548,7 @@ func GetInfoFromErrMsg(raw string) (channel string) {
 }
 
 /*
-	解析消息类型
+解析消息类型
 */
 func (a *WsClient) parseMessage(raw []byte) (evt Event, data interface{}, err error) {
 	evt = EVENT_UNKNOWN
@@ -660,7 +661,7 @@ func (a *WsClient) Stop() error {
 	}
 
 	a.isStarted = false
-	
+
 	if a.conn != nil {
 		a.conn.Close()
 	}
@@ -678,7 +679,7 @@ func (a *WsClient) Stop() error {
 }
 
 /*
-	添加全局消息处理的回调函数
+添加全局消息处理的回调函数
 */
 func (a *WsClient) AddMessageHook(fn ReceivedDataCallback) error {
 	a.onMessageHook = fn
@@ -686,7 +687,7 @@ func (a *WsClient) AddMessageHook(fn ReceivedDataCallback) error {
 }
 
 /*
-	添加订阅消息处理的回调函数
+添加订阅消息处理的回调函数
 */
 func (a *WsClient) AddBookMsgHook(fn ReceivedMsgDataCallback) error {
 	a.onBookMsgHook = fn
@@ -694,9 +695,9 @@ func (a *WsClient) AddBookMsgHook(fn ReceivedMsgDataCallback) error {
 }
 
 /*
-	添加深度消息处理的回调函数
-	例如:
-	cli.AddDepthHook(func(ts time.Time, data DepthData) error { return nil })
+添加深度消息处理的回调函数
+例如:
+cli.AddDepthHook(func(ts time.Time, data DepthData) error { return nil })
 */
 func (a *WsClient) AddDepthHook(fn ReceivedDepthDataCallback) error {
 	a.onDepthHook = fn
@@ -704,7 +705,7 @@ func (a *WsClient) AddDepthHook(fn ReceivedDepthDataCallback) error {
 }
 
 /*
-	添加错误类型消息处理的回调函数
+添加错误类型消息处理的回调函数
 */
 func (a *WsClient) AddErrMsgHook(fn ReceivedDataCallback) error {
 	a.OnErrorHook = fn
@@ -712,7 +713,7 @@ func (a *WsClient) AddErrMsgHook(fn ReceivedDataCallback) error {
 }
 
 /*
-	判断连接是否存活
+判断连接是否存活
 */
 func (a *WsClient) IsAlive() bool {
 	res := false

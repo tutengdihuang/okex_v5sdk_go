@@ -3,9 +3,9 @@ package ws
 import (
 	"errors"
 	"log"
+	. "okex_v5sdk_go/ws/wImpl"
+	. "okex_v5sdk_go/ws/wInterface"
 	"runtime/debug"
-	. "v5sdk_go/ws/wImpl"
-	. "v5sdk_go/ws/wInterface"
 )
 
 // 判断返回结果成功失败
