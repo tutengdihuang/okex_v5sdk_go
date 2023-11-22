@@ -2,8 +2,8 @@ package ws
 
 import (
 	"context"
+	. "github.com/tutengdihuang/okex_v5sdk_go/ws/wImpl"
 	"log"
-	. "okex_v5sdk_go/ws/wImpl"
 	"time"
 )
 

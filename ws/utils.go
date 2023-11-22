@@ -2,9 +2,9 @@ package ws
 
 import (
 	"errors"
+	. "github.com/tutengdihuang/okex_v5sdk_go/ws/wImpl"
+	. "github.com/tutengdihuang/okex_v5sdk_go/ws/wInterface"
 	"log"
-	. "okex_v5sdk_go/ws/wImpl"
-	. "okex_v5sdk_go/ws/wInterface"
 	"runtime/debug"
 )
 

@@ -2,7 +2,7 @@ package ws
 
 import (
 	"errors"
-	. "okex_v5sdk_go/ws/wImpl"
+	. "github.com/tutengdihuang/okex_v5sdk_go/ws/wImpl"
 )
 
 /*

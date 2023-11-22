@@ -3,8 +3,8 @@ package ws
 import (
 	"encoding/json"
 	"fmt"
+	. "github.com/tutengdihuang/okex_v5sdk_go/ws/wImpl"
 	"log"
-	. "okex_v5sdk_go/ws/wImpl"
 	"strings"
 	"testing"
 	"time"

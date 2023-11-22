@@ -3,15 +3,15 @@ package main
 import (
 	"context"
 	"fmt"
+	. "github.com/tutengdihuang/okex_v5sdk_go/rest"
+	. "github.com/tutengdihuang/okex_v5sdk_go/ws"
 	"log"
-	. "okex_v5sdk_go/rest"
-	. "okex_v5sdk_go/ws"
 	"time"
 )
 
 /*
-	rest API请求
-	更多示例请查看 rest/rest_test.go
+rest API请求
+更多示例请查看 rest/rest_test.go
 */
 func REST() {
 	// 设置您的APIKey

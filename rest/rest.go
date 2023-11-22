@@ -6,9 +6,9 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	. "github.com/tutengdihuang/okex_v5sdk_go/utils"
 	"io/ioutil"
 	"net/http"
-	. "okex_v5sdk_go/utils"
 	"strings"
 	"time"
 )

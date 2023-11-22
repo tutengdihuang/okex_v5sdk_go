@@ -3,12 +3,12 @@ package ws
 import (
 	"context"
 	"errors"
+	. "github.com/tutengdihuang/okex_v5sdk_go/config"
+	"github.com/tutengdihuang/okex_v5sdk_go/rest"
+	. "github.com/tutengdihuang/okex_v5sdk_go/utils"
+	. "github.com/tutengdihuang/okex_v5sdk_go/ws/wImpl"
+	. "github.com/tutengdihuang/okex_v5sdk_go/ws/wInterface"
 	"log"
-	. "okex_v5sdk_go/config"
-	"okex_v5sdk_go/rest"
-	. "okex_v5sdk_go/utils"
-	. "okex_v5sdk_go/ws/wImpl"
-	. "okex_v5sdk_go/ws/wInterface"
 	"sync"
 	"time"
 )
