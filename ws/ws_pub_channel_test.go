@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	. "okex_v5sdk_go/ws/wImpl"
 	"strings"
 	"testing"
 	"time"
-	. "v5sdk_go/ws/wImpl"
 )
 
 func prework() *WsClient {

@@ -3,18 +3,19 @@ package ws
 import (
 	"context"
 	"log"
+	. "okex_v5sdk_go/ws/wImpl"
 	"time"
-	. "v5sdk_go/ws/wImpl"
 )
 
 /*
-	websocket交易 通用请求
-	参数说明：
-		evtId：封装的事件类型
-		id: 请求ID
-		op: 请求参数op
-		params: 请求参数
-		timeOut: 超时时间
+websocket交易 通用请求
+参数说明：
+
+	evtId：封装的事件类型
+	id: 请求ID
+	op: 请求参数op
+	params: 请求参数
+	timeOut: 超时时间
 */
 func (a *WsClient) jrpcReq(evtId Event, op string, id string, params []map[string]interface{}, timeOut ...int) (res bool, detail *ProcessDetail, err error) {
 	res = true
@@ -56,11 +57,12 @@ func (a *WsClient) jrpcReq(evtId Event, op string, id string, params []map[strin
 }
 
 /*
-	单个下单
-	参数说明：
-		id: 请求ID
-		params: 请求参数
-		timeOut: 超时时间
+单个下单
+参数说明：
+
+	id: 请求ID
+	params: 请求参数
+	timeOut: 超时时间
 */
 func (a *WsClient) PlaceOrder(id string, param map[string]interface{}, timeOut ...int) (res bool, detail *ProcessDetail, err error) {
 	op := "order"
@@ -74,11 +76,12 @@ func (a *WsClient) PlaceOrder(id string, param map[string]interface{}, timeOut .
 }
 
 /*
-	批量下单
-	参数说明：
-		id: 请求ID
-		params: 请求参数
-		timeOut: 超时时间
+批量下单
+参数说明：
+
+	id: 请求ID
+	params: 请求参数
+	timeOut: 超时时间
 */
 func (a *WsClient) BatchPlaceOrders(id string, params []map[string]interface{}, timeOut ...int) (res bool, detail *ProcessDetail, err error) {
 
@@ -89,11 +92,12 @@ func (a *WsClient) BatchPlaceOrders(id string, params []map[string]interface{}, 
 }
 
 /*
-	单个撤单
-	参数说明：
-		id: 请求ID
-		params: 请求参数
-		timeOut: 超时时间
+单个撤单
+参数说明：
+
+	id: 请求ID
+	params: 请求参数
+	timeOut: 超时时间
 */
 func (a *WsClient) CancelOrder(id string, param map[string]interface{}, timeOut ...int) (res bool, detail *ProcessDetail, err error) {
 
@@ -108,11 +112,12 @@ func (a *WsClient) CancelOrder(id string, param map[string]interface{}, timeOut 
 }
 
 /*
-	批量撤单
-	参数说明：
-		id: 请求ID
-		params: 请求参数
-		timeOut: 超时时间
+批量撤单
+参数说明：
+
+	id: 请求ID
+	params: 请求参数
+	timeOut: 超时时间
 */
 func (a *WsClient) BatchCancelOrders(id string, params []map[string]interface{}, timeOut ...int) (res bool, detail *ProcessDetail, err error) {
 
@@ -123,11 +128,12 @@ func (a *WsClient) BatchCancelOrders(id string, params []map[string]interface{},
 }
 
 /*
-	单个改单
-	参数说明：
-		id: 请求ID
-		params: 请求参数
-		timeOut: 超时时间
+单个改单
+参数说明：
+
+	id: 请求ID
+	params: 请求参数
+	timeOut: 超时时间
 */
 func (a *WsClient) AmendOrder(id string, param map[string]interface{}, timeOut ...int) (res bool, detail *ProcessDetail, err error) {
 
@@ -142,11 +148,12 @@ func (a *WsClient) AmendOrder(id string, param map[string]interface{}, timeOut .
 }
 
 /*
-	批量改单
-	参数说明：
-		id: 请求ID
-		params: 请求参数
-		timeOut: 超时时间
+批量改单
+参数说明：
+
+	id: 请求ID
+	params: 请求参数
+	timeOut: 超时时间
 */
 func (a *WsClient) BatchAmendOrders(id string, params []map[string]interface{}, timeOut ...int) (res bool, detail *ProcessDetail, err error) {
 
