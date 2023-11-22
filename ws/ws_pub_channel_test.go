@@ -453,20 +453,20 @@ func TestOrderBooks(t *testing.T) {
 
 		}
 
-		// // 查看当前合并后的全量深度数据
-		// snapshot, err := r.GetSnapshotByChannel(data)
-		// if err != nil {
-		// 	t.Fatal("深度数据不存在！")
-		// }
-		// // 展示ask/bid 前5档数据
-		// fmt.Println(" Ask 5 档数据 >> ")
-		// for _, v := range snapshot.Asks[:5] {
-		// 	fmt.Println(" price:", v[0], " amount:", v[1])
-		// }
-		// fmt.Println(" Bid 5 档数据 >> ")
-		// for _, v := range snapshot.Bids[:5] {
-		// 	fmt.Println(" price:", v[0], " amount:", v[1])
-		// }
+		// 查看当前合并后的全量深度数据
+		snapshot, err := r.GetSnapshotByChannel(data)
+		if err != nil {
+			t.Fatal("深度数据不存在！")
+		}
+		// 展示ask/bid 前5档数据
+		fmt.Println(" Ask 5 档数据 >> ")
+		for _, v := range snapshot.Asks[:5] {
+			fmt.Println(" price:", v[0], " amount:", v[1])
+		}
+		fmt.Println(" Bid 5 档数据 >> ")
+		for _, v := range snapshot.Bids[:5] {
+			fmt.Println(" price:", v[0], " amount:", v[1])
+		}
 		return nil
 	})
 
