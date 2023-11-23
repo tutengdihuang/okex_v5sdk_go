@@ -471,7 +471,7 @@ func TestOrderBooks(t *testing.T) {
 	})
 
 	// 可选类型：books books5 books-l2-tbt
-	channel := "books50-l2-tbt"
+	channel := "bbo-tbt"
 
 	instIds := []string{"BTC-USDT"}
 	for _, instId := range instIds {
