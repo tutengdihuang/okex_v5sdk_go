@@ -11,7 +11,7 @@ import (
 )
 
 func prework() *WsClient {
-	ep := "wss://ws.okex.com:8443/ws/v5/public?brokerId=9999"
+	ep := "wss://wsaws.okx.com:8443/ws/v5/business"
 	r, err := NewWsClient(ep)
 	if err != nil {
 		log.Fatal(err)
