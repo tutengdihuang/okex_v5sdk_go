@@ -11,7 +11,7 @@ import (
 )
 
 func prework() *WsClient {
-	ep := "wss://wsaws.okx.com:8443/ws/v5/business"
+	ep := "wss://ws.okex.com:8443/ws/v5/public?brokerId=9999"
 	r, err := NewWsClient(ep)
 	if err != nil {
 		log.Fatal(err)
@@ -471,7 +471,7 @@ func TestOrderBooks(t *testing.T) {
 	})
 
 	// 可选类型：books books5 books-l2-tbt
-	channel := "bbo-tbt"
+	channel := "books"
 
 	instIds := []string{"BTC-USDT"}
 	for _, instId := range instIds {
