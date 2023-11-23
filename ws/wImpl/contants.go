@@ -39,6 +39,7 @@ const (
 	EVENT_BOOK_ORDER_BOOK
 	EVENT_BOOK_ORDER_BOOK5
 	EVENT_BOOK_ORDER_SPREAD_BOOK5
+	EVENT_BOOK_ORDER_BOOK_BBO_TBT
 	EVENT_BOOK_ORDER_BOOK_TBT
 	EVENT_BOOK_ORDER_BOOK50_TBT
 	EVENT_BOOK_OPTION_SUMMARY
@@ -98,6 +99,7 @@ var EVENT_TABLE = [][]interface{}{
 	{EVENT_BOOK_ORDER_BOOK5, "5档深度", "books5"},
 	{EVENT_BOOK_ORDER_SPREAD_BOOK5, "5档深度", "sprd-books5"},
 	{EVENT_BOOK_ORDER_BOOK_TBT, "tbt深度", "books-l2-tbt"},
+	{EVENT_BOOK_ORDER_BOOK_BBO_TBT, "首次推1档快照数据，以后定量推送，每10毫秒当1档快照数据有变化推送一次1档数据", "bbo-tbt"},
 	{EVENT_BOOK_ORDER_BOOK50_TBT, "tbt50深度", "books50-l2-tbt"},
 	{EVENT_BOOK_OPTION_SUMMARY, "期权定价", "opt-summary"},
 	{EVENT_BOOK_FUND_RATE, "资金费率", "funding-rate"},
