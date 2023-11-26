@@ -112,7 +112,7 @@ func wsPub() {
 	}
 
 	// 设置连接超时
-	r.SetDailTimeout(time.Second * 2)
+	r.SetDailTimeout(time.Second * 20000)
 	err = r.Start()
 	if err != nil {
 		log.Println(err)
@@ -208,11 +208,11 @@ func main() {
 	wsPub()
 
 	// 私有订阅
-	wsPriv()
+	//wsPriv()
 
 	// websocket交易
-	wsJrpc()
+	//wsJrpc()
 
 	// rest请求
-	REST()
+	//REST()
 }
