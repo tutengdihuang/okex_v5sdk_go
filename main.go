@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/tutengdihuang/okex_v5sdk_go/integration"
 	. "github.com/tutengdihuang/okex_v5sdk_go/rest"
 	. "github.com/tutengdihuang/okex_v5sdk_go/ws"
 	"log"
@@ -205,7 +206,7 @@ func wsJrpc() {
 
 func main() {
 	// 公共订阅
-	wsPub()
+	//wsPub()
 
 	// 私有订阅
 	//wsPriv()
@@ -215,4 +216,6 @@ func main() {
 
 	// rest请求
 	//REST()
+
+	integration.OrderBooksRemote()
 }
