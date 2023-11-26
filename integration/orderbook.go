@@ -169,7 +169,7 @@ func OrderBooksRemoteSlot1() {
 	// 可选类型：books books5 books-l2-tbt
 	channel := "bbo-tbt"
 
-	instIds := []string{"APE-ETH"}
+	instIds := []string{"ETH-USDT"}
 	for _, instId := range instIds {
 		var args []map[string]string
 		arg := make(map[string]string)
