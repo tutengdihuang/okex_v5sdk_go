@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="remote_okex_v5sdk_go" type="GoRemoteDebugConfigurationType" factoryName="Go Remote" host="54.169.108.72">
+    <option name="disconnectOption" value="ASK" />
+    <method v="2" />
+  </configuration>
+</component>
