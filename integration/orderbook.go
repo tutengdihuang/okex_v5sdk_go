@@ -96,6 +96,76 @@ func OrderBooksRemote() {
 	r.AddDepthHook(hookFunc)
 
 	// 可选类型：books books5 books-l2-tbt
+	channel := "books-l2-tbt"
+
+	instIds := []string{"BTC-USDT"}
+	for _, instId := range instIds {
+		var args []map[string]string
+		arg := make(map[string]string)
+		arg["instId"] = instId
+		args = append(args, arg)
+
+		start := time.Now()
+		res, _, err = r.PubOrderBooks(ws.OP_SUBSCRIBE, channel, args)
+		if res {
+			usedTime := time.Since(start)
+			fmt.Println("订阅成功！", usedTime.String())
+		} else {
+			fmt.Println("订阅失败！", err)
+			log.Fatal("订阅失败！", err)
+		}
+	}
+
+	select {
+	case <-end:
+
+	}
+	//等待推送
+	for _, instId := range instIds {
+		var args []map[string]string
+		arg := make(map[string]string)
+		arg["instId"] = instId
+		args = append(args, arg)
+
+		start := time.Now()
+		res, _, err = r.PubOrderBooks(ws.OP_UNSUBSCRIBE, channel, args)
+		if res {
+			usedTime := time.Since(start)
+			fmt.Println("取消订阅成功！", usedTime.String())
+		} else {
+			fmt.Println("取消订阅失败！", err)
+			log.Fatal("取消订阅失败！", err)
+		}
+	}
+
+}
+
+func OrderBooksRemoteSlot1() {
+	r := prework()
+	var err error
+	var res bool
+
+	/*
+		设置关闭深度数据管理
+	*/
+	// err = r.EnableAutoDepthMgr(false)
+	// if err != nil {
+	// 	fmt.Println("关闭自动校验失败！")
+	// }
+
+	end := make(chan struct{})
+	var hookFunc = func(ts time.Time, data wImpl.MsgData) error {
+		// 对于深度类型数据处理的用户可以自定义
+
+		// 检测深度数据是否正常
+		fmt.Println("个数：", len(data.Data))
+		fmt.Printf("===%+v\n", data)
+		fmt.Println("===", data)
+		return nil
+	}
+	r.AddBookMsgHook(hookFunc)
+
+	// 可选类型：books books5 books-l2-tbt
 	channel := "bbo-tbt"
 
 	instIds := []string{"BTC-USDT"}
