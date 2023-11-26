@@ -38,8 +38,7 @@ func OrderBooksRemote() {
 	// }
 
 	end := make(chan struct{})
-
-	r.AddDepthHook(func(ts time.Time, data wImpl.DepthData) error {
+	var hookFunc = func(ts time.Time, data wImpl.DepthData) error {
 		// 对于深度类型数据处理的用户可以自定义
 
 		// 检测深度数据是否正常
@@ -93,7 +92,8 @@ func OrderBooksRemote() {
 			fmt.Println(" price:", v[0], " amount:", v[1])
 		}
 		return nil
-	})
+	}
+	r.AddDepthHook(hookFunc)
 
 	// 可选类型：books books5 books-l2-tbt
 	channel := "bbo-tbt"
