@@ -56,7 +56,7 @@ func Test_okx_proxy(t *testing.T) {
 		return url.Parse("ws://" + endPointAddr)
 	}
 	srv := &http.Server{
-		Addr:    "localhost:8090",
+		Addr:    ":8090",
 		Handler: websocketHandler,
 	}
 	go func() {
