@@ -12,7 +12,7 @@ import (
 
 func prework() *ws.WsClient {
 	//ep := "wss://wspap.okx.com:8443/ws/v5/public?brokerId=9999"
-	ep := "wss://ws.okx.com:8443/ws/v5/public?brokerId=9999"
+	ep := "wss://ws.okx.com:8443/ws/v5/public"
 	r, err := ws.NewWsClient(ep)
 	if err != nil {
 		log.Fatal(err)
