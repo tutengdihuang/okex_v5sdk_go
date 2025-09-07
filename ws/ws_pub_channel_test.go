@@ -3,15 +3,16 @@ package ws
 import (
 	"encoding/json"
 	"fmt"
-	. "github.com/tutengdihuang/okex_v5sdk_go/ws/wImpl"
 	"log"
 	"strings"
 	"testing"
 	"time"
+
+	. "github.com/tutengdihuang/okex_v5sdk_go/ws/wImpl"
 )
 
 func prework() *WsClient {
-	ep := "wss://ws.okex.com:8443/ws/v5/public?brokerId=9999"
+	ep := "wss://ws.okx.com:8443/ws/v5/business"
 	r, err := NewWsClient(ep)
 	if err != nil {
 		log.Fatal(err)
