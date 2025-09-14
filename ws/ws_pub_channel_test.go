@@ -12,7 +12,37 @@ import (
 )
 
 func prework() *WsClient {
+	// 根据官方文档，公共频道应该使用 /ws/v5/public 端点
+	ep := "wss://ws.okx.com:8443/ws/v5/public"
+	r, err := NewWsClient(ep)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = r.Start()
+	if err != nil {
+		log.Fatal(err, ep)
+	}
+	return r
+}
+func preworkBusiness() *WsClient {
+	// 根据官方文档，K线相关频道需要使用 /ws/v5/business 端点
 	ep := "wss://ws.okx.com:8443/ws/v5/business"
+	r, err := NewWsClient(ep)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = r.Start()
+	if err != nil {
+		log.Fatal(err, ep)
+	}
+	return r
+}
+
+func preworkPublic() *WsClient {
+	// 根据官方文档，其他公共频道使用 /ws/v5/public 端点
+	ep := "wss://ws.okx.com:8443/ws/v5/public"
 	r, err := NewWsClient(ep)
 	if err != nil {
 		log.Fatal(err)
@@ -156,8 +186,8 @@ func TestOpenInsterest(t *testing.T) {
 		//return
 	}
 
-	time.Sleep(60 * time.Second)
-	//等待推送
+	time.Sleep(10 * time.Second)
+	//等待推送，缩短等待时间避免心跳超时
 
 	start = time.Now()
 	res, _, err = r.PubOpenInsterest(OP_UNSUBSCRIBE, args)
@@ -173,7 +203,7 @@ func TestOpenInsterest(t *testing.T) {
 
 // K线频道测试
 func TestKLine(t *testing.T) {
-	r := prework()
+	r := preworkBusiness()
 	var err error
 	var res bool
 
@@ -195,7 +225,7 @@ func TestKLine(t *testing.T) {
 		t.Fatal("订阅失败！", err)
 	}
 
-	time.Sleep(60 * time.Second)
+	time.Sleep(10 * time.Second) // 缩短等待时间避免心跳超时
 	//等待推送
 
 	start = time.Now()
@@ -232,7 +262,7 @@ func TestTrade(t *testing.T) {
 		//return
 	}
 
-	time.Sleep(60 * time.Second)
+	time.Sleep(10 * time.Second) // 缩短等待时间避免心跳超时
 	//等待推送
 
 	start = time.Now()
@@ -471,8 +501,9 @@ func TestOrderBooks(t *testing.T) {
 		return nil
 	})
 
-	// 可选类型：books books5 books-l2-tbt
-	channel := "bbo-tbt"
+	// 可选类型：books books5 books-l2-tbt bbo-tbt
+	// 根据官方文档，使用 books 频道进行测试
+	channel := "books"
 
 	instIds := []string{"BTC-USDT"}
 	for _, instId := range instIds {
@@ -592,7 +623,7 @@ func TestFundRate(t *testing.T) {
 
 // 指数K线频道 测试
 func TestKLineIndex(t *testing.T) {
-	r := prework()
+	r := preworkBusiness()
 	var err error
 	var res bool
 
